@@ -1,5 +1,7 @@
+import { CardInfo } from "../../components/CardInfo";
+
 export function SignUp() {
     return (
-        <h1>sign up page</h1>
+        <CardInfo />
     )
 }
