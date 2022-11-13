@@ -18,7 +18,7 @@ export function MyRoutes() {
         <Routes>
             <Route path='/' element={<DefaultLayout />}>
                 <Route path='/' element={<SignIn />} >
-                    <Route path='/' element={<SignIn />} />
+                    <Route path='/sign-in' element={<SignIn />} />
                 </Route>
 
                 <Route path='/sign-up' element={<SignUp />} />
