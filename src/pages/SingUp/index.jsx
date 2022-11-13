@@ -1,8 +1,13 @@
-import { Footer } from "../../components/Footer";
+import { useForm } from "react-hook-form";
 import { CardInfo } from "../../components/CardInfo";
+import { Footer } from "../../components/Footer";
 import { CardSignUp, Container, LinkSignIn, Row } from "./styles";
 
 export function SignUp() {
+
+    const { register, handleSubmit } = useForm()
+
+
     return (
         <Container>
             <Row>
@@ -11,12 +16,33 @@ export function SignUp() {
                     <header>
                         <span>Acesse o <b>login</b> com seu usuário do Github</span>
                     </header>
-                    <form>
-                        <input type="text" placeholder="Digite seu e-mail" />
-                        <input type="text" placeholder="Digite sua senha" />
-                        <input type="text" placeholder="Repita sua senha" />
-                        <input type="text" placeholder="Usuário github" />
-                        <input type="text" placeholder="Apelido" />
+                    <form onSubmit={handleSubmit((data) => console.log(data))}>
+                        <input
+                            type="email"
+                            placeholder="Digite seu e-mail"
+                            {...register('email')}
+                        />
+                        {/* {errors.email && <span>Error no email</span>} */}
+                        <input
+                            type="password"
+                            placeholder="Digite sua senha"
+                            {...register('password')}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Repita sua senha"
+                            {...register('passwordConfirm')}
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Usuário github"
+                            {...register('githubUser')} />
+                        <input
+                            type="text"
+                            placeholder="Apelido"
+                            {...register('nickname')} />
+
                         <button type="submit">Cadastrar</button>
                     </form>
                     <LinkSignIn to='/'>
@@ -25,6 +51,6 @@ export function SignUp() {
                 </CardSignUp>
             </Row>
             <Footer />
-        </Container>
+        </Container >
     )
 }
