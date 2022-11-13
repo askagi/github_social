@@ -12,4 +12,10 @@ export const Container = styled.footer`
     span, a {
         font-size: 1.2rem;
     }
+
+    a::before {
+        display: inline;
+        content: '- ';
+        color: ${props => props.theme["gray-600"]}
+    }
 `
