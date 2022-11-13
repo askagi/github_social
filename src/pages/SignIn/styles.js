@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -66,5 +67,10 @@ export const CardSignIn = styled.div`
             }
         }
     }
+`
+
+export const LinkSignUp = styled(NavLink)`
+    font-size: 1.2rem;
+    margin-top: 1.6rem;
 `
 
