@@ -39,7 +39,9 @@ export const GlocalStyles = createGlobalStyle`
     }
   }
 
-  input {
+  input[type="text"], 
+  input[type="password"],
+  input[type="email"] {
         width: 100%;
         padding: 0.9rem 1.6rem;
         border: 0;

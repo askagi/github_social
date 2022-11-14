@@ -1,7 +1,6 @@
-import { Footer } from "../../components/Footer";
 import { CardInfo } from "../../components/CardInfo";
+import { Footer } from "../../components/Footer";
 import { CardSignIn, Container, LinkSignUp, Row } from "./styles";
-import { NavLink } from 'react-router-dom'
 
 export function SignIn() {
     return (

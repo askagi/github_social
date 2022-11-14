@@ -1,21 +1,22 @@
-import { Suspense, useState } from "react"
+import { Suspense } from "react"
 import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
+import { useTheme } from "../hooks/useTheme"
 import { GlocalStyles } from "../styles/global"
-import { lightTheme, darkTheme } from "../styles/theme/default"
+import { darkTheme, lightTheme } from "../styles/theme/default"
 import { MyRoutes } from "./routes"
 
 export function App() {
 
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
+  const { isDarkTheme } = useTheme();
   return (
-    <Suspense fallback={null}>
-      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <Suspense fallback={null}>
         <BrowserRouter>
           <MyRoutes />
           <GlocalStyles />  {/*Estilos globais*/}
         </BrowserRouter>
-      </ThemeProvider>
-    </Suspense>
+      </Suspense>
+    </ThemeProvider>
   )
 }
