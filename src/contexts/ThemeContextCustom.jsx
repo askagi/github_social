@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { useThemeProvider } from '../hooks/useThemeProvider';
+import { useThemeProvider } from '../hooks/useTheme/useThemeProvider';
 
 export const ThemeContextCustom = createContext({})
 

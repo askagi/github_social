@@ -11,12 +11,12 @@ export function App() {
   const { isDarkTheme } = useTheme();
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-      <Suspense fallback={null}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Suspense fallback={null}>
           <MyRoutes />
           <GlocalStyles />  {/*Estilos globais*/}
-        </BrowserRouter>
-      </Suspense>
+        </Suspense>
+      </BrowserRouter>
     </ThemeProvider>
   )
 }

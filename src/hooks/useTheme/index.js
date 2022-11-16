@@ -1,4 +1,4 @@
-import { ThemeContextCustom } from "../contexts/ThemeContextCustom";
+import { ThemeContextCustom } from "../../contexts/ThemeContextCustom";
 import { useContext } from "react";
 
 export function useTheme() {
