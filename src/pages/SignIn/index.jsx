@@ -10,7 +10,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { pt } from 'yup-locales';
 import { useEffect, useState } from "react";
 yup.setLocale(pt)
-/*asdfasdf*/
 
 export function SignIn() {
     const schemaSignIn = yup.object({
@@ -19,11 +18,13 @@ export function SignIn() {
     }).required()
 
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+    const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm({
         resolver: yupResolver(schemaSignIn)
     });
+
     const { setUserData, userData } = useStores()
     const [authenticationError, setAuthenticationError] = useState(false)
+    const { inputError, setInputError } = useState(null)
 
     async function login(data) {
         const users = await (await api.get('/users')).data;
@@ -41,9 +42,9 @@ export function SignIn() {
             }
         })
 
-        if (!user) {
-            setAuthenticationError(true)
-        }
+        // if (watch('email')) {
+        //     setInputError(errors.email)
+        // }
     }
 
     useEffect(() => {
@@ -69,9 +70,9 @@ export function SignIn() {
                             placeholder="Digite sua senha"
                             {...register('password')} />
 
-                        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-                        {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-                        {authenticationError && <ErrorMessage>E-mail ou Senha incorretos!</ErrorMessage>}
+                        {<ErrorMessage>{errors.email?.message}</ErrorMessage>}
+                        {<ErrorMessage>{errors.password?.message}</ErrorMessage>}
+                        {/* {inputError && <ErrorMessage>{console.log(inputError)}</ErrorMessage>} */}
 
                         <a href="#">esqueceu a senha ?</a>
                         <button

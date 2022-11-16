@@ -7,11 +7,7 @@ export const GlocalStyles = createGlobalStyle`
         box-sizing: border-box;
     }
 
-    :focus {
-        outline: 0;
-        box-shadow: 0 0 0 1px ${(props) => props.theme.Violet};
-        transition: box-shadow 0.2s;
-    }
+    
 
     html {
         font-size: 62.5%;
@@ -52,6 +48,12 @@ export const GlocalStyles = createGlobalStyle`
 
         &::placeholder {
             color: ${(props) => props.theme['gray-200']};
-    }   
+    }  
+    
+    :focus {
+        outline: 0;
+        box-shadow: 0 0 0 1px ${(props) => props.theme.Violet};
+        transition: box-shadow 0.3s;
+    }
 }
 `
