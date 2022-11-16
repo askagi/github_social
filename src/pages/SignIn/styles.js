@@ -62,8 +62,12 @@ export const CardSignIn = styled.div`
             cursor: pointer;
             transition: background-color 0.2s;
             
-            &:hover {
+            &:not(:disabled):hover {
                 background-color: ${props => props.theme.Violet};
+            }
+            &:disabled {
+                opacity: 0.6;
+                cursor: progress;
             }
         }
     }
@@ -72,5 +76,10 @@ export const CardSignIn = styled.div`
 export const LinkSignUp = styled(NavLink)`
     font-size: 1.2rem;
     margin-top: 1.6rem;
+`
+
+export const ErrorMessage = styled.span`
+    color: red;
+    margin-bottom: 1rem;
 `
 

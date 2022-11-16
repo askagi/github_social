@@ -13,21 +13,17 @@ export function SignUp() {
     const schema = yup.object({
         email: yup.string().email().required(),
         password: yup.string().required(),
+        passwordConfirm: yup.string().required(),
         githubUser: yup.string().required(),
     }).required()
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors, isSubmitting, isValid } } = useForm({
         resolver: yupResolver(schema)
     })
 
     async function createUser(data) {
-        const user = {
-            email: data.email,
-            password: data.password,
-            githubUser: data.githubUser,
-            nickname: data.nickname
-        }
-        console.log(user)
+
+        const { passwordConfirm, ...user } = data;
 
         const users = await (await api.get('/users')).data;
         console.log(users);
@@ -50,7 +46,7 @@ export function SignUp() {
                     </header>
                     <form onSubmit={handleSubmit(createUser)}>
                         <input
-                            type="email"
+                            type="text"
                             placeholder="Digite seu e-mail"
                             {...register('email')}
                         />
@@ -74,7 +70,11 @@ export function SignUp() {
                             placeholder="Apelido"
                             {...register('nickname')} />
 
-                        <button type="submit">Cadastrar</button>
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}>
+                            Cadastrar
+                        </button>
                     </form>
                     <LinkSignIn to='/'>
                         Já tenho uma conta

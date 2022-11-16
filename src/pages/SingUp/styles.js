@@ -62,11 +62,14 @@ export const CardSignUp = styled.div`
             cursor: pointer;
             transition: background-color 0.2s;
             
-            &:hover {
+            &:not(:disabled):hover {
                 background-color: ${props => props.theme.Violet};
             }
+            &:disabled {
+                opacity: 0.6;
+                cursor: progress;
+            }
         }
-
     }
 `
 
