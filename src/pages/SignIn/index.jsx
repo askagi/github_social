@@ -2,15 +2,28 @@ import { useForm } from "react-hook-form";
 import { api } from "../../services/axios";
 import { CardInfo } from "../../components/CardInfo";
 import { Footer } from "../../components/Footer";
-import { CardSignIn, Container, LinkSignUp, Row } from "./styles";
+import { CardSignIn, Container, LinkSignUp, Row, ErrorMessage } from "./styles";
 import { useStores } from '../../hooks/useStores';
 import { useNavigate } from 'react-router-dom'
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { pt } from 'yup-locales';
+import { useEffect, useState } from "react";
+yup.setLocale(pt)
+/*asdfasdf*/
 
 export function SignIn() {
+    const schemaSignIn = yup.object({
+        email: yup.string().email().required(),
+        password: yup.string().required()
+    }).required()
 
     const navigate = useNavigate();
-    const { register, handleSubmit } = useForm();
-    const { setUserData } = useStores()
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+        resolver: yupResolver(schemaSignIn)
+    });
+    const { setUserData, userData } = useStores()
+    const [authenticationError, setAuthenticationError] = useState(false)
 
     async function login(data) {
         const users = await (await api.get('/users')).data;
@@ -18,24 +31,26 @@ export function SignIn() {
         const user = users.find(user => {
             if (user.email === data.email && user.password === data.password) {
                 console.log('Sucesso!');
-
-                setUserData({
-                    id: user.id,
-                    email: user.email,
-                    githubUser: user.githubUser,
-                    nickname: user.nickname,
-                });
+                const { password, ...userRest } = user;
+                setUserData(userRest)
                 navigate('/main')
+                setAuthenticationError(false)
                 return true;
             } else {
                 return false
             }
         })
 
-        console.log(user);
-
+        if (!user) {
+            setAuthenticationError(true)
+        }
     }
 
+    useEffect(() => {
+        if (userData) {
+            navigate('/main')
+        }
+    }, [])
     return (
         <Container>
             <Row>
@@ -50,15 +65,25 @@ export function SignIn() {
                             placeholder="Digite seu e-mail"
                             {...register('email')} />
                         <input
-                            type="text"
+                            type="password"
                             placeholder="Digite sua senha"
                             {...register('password')} />
+
+                        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+                        {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+                        {authenticationError && <ErrorMessage>E-mail ou Senha incorretos!</ErrorMessage>}
+
                         <a href="#">esqueceu a senha ?</a>
-                        <button type="submit">Login</button>
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}>
+                            Login
+                        </button>
                     </form>
                     <LinkSignUp to='/sign-up'>
                         Criar uma conta
                     </LinkSignUp>
+
                 </CardSignIn>
             </Row>
             <Footer />

@@ -1,3 +1,4 @@
+import { Load } from "../components/Load"
 import { Suspense } from "react"
 import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
@@ -12,7 +13,7 @@ export function App() {
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <BrowserRouter>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Load />}>
           <MyRoutes />
           <GlocalStyles />  {/*Estilos globais*/}
         </Suspense>

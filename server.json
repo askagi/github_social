@@ -13,6 +13,13 @@
       "githubUser": "teste",
       "nickname": "teste",
       "id": 2
+    },
+    {
+      "email": "costa@email.com",
+      "password": "321",
+      "githubUser": "askagi",
+      "nickname": "askagi",
+      "id": 3
     }
   ]
 }
