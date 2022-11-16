@@ -18,7 +18,7 @@ export const lightTheme = {
 }
 
 export const darkTheme = {
-    'blue-100': '#F1F9FE',
+    'blue-100': '#999999',
     'blue-200': '#333333',
     'blue-300': '#BBCDE8;',
     'blue-600': '#5C9ECF',
@@ -32,5 +32,5 @@ export const darkTheme = {
     'gray-600': '#333333',
 
     Violet: '#D81D99',
-    white: '#FFFFFF',
+    white: '#5A5A5A',
 }

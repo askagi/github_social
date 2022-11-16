@@ -66,6 +66,7 @@ export const CardSignUp = styled.div`
                 background-color: ${props => props.theme.Violet};
             }
         }
+
     }
 `
 
@@ -73,4 +74,6 @@ export const LinkSignIn = styled(NavLink)`
     font-size: 1.2rem;
     margin-top: 1rem;
 `
+
+
 

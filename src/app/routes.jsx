@@ -1,3 +1,4 @@
+import { useStores } from '../hooks/useStores';
 import { lazy } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
@@ -8,9 +9,9 @@ const Main = lazy(async () => import('../pages/Main').then((m) => ({ default: m.
 const Page404 = lazy(async () => import('../pages/Page404').then((m) => ({ default: m.Page404 })));
 
 function ProtectedRoutes({ redirectTo }) {
-    const token = true;
+    const { userData } = useStores();
 
-    return token ? <Outlet /> : <Navigate to={redirectTo} />;
+    return userData ? <Outlet /> : <Navigate to={redirectTo} />;
 }
 
 export function MyRoutes() {
